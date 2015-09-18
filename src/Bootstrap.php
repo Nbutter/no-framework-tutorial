@@ -1,5 +1,6 @@
 <?php 
-namespace Example;
+
+namespace Noframework;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -23,4 +24,9 @@ if ($environment !== 'production'){
 
 $whoops->register();
 
-throw new \Exception;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+
+$request = Request::createFromGlobals();
+echo $request->getPathInfo();
+
