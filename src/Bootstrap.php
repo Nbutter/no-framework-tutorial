@@ -36,14 +36,14 @@ foreach ($response->getHeaders() as $header) {
 	header($header, false);  // ~ overwrite existing headers = false
 }
 
-$dispatcher = \FastRoute\simpleDispatcher(function(\FastRoute\RouteCollector $r){
-	$r->addRoute('GET', '/hello-world', function(){
-		echo 'You want "Hello, world?" You got it.';
-	});
-	$r->addRoute('GET', '/another-route', function(){
-		echo "Hey, here's another route";
-	});
-});
+$routeDefinitionCallback = function(\FastRoute\RouteCollector $r){
+	$routes = include('Routes.php');
+	foreach($routes as $route) {
+		$r->addRoute($route[0], $route[1], $route[2]);
+	}
+};
+
+$dispatcher = \FastRoute\simpleDispatcher($routeDefinitionCallback);
 
 $routeInfo = $dispatcher->dispatch($request->getMethod(), $request->getPath());
 
