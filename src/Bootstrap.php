@@ -36,6 +36,29 @@ foreach ($response->getHeaders() as $header) {
 	header($header, false);  // ~ overwrite existing headers = false
 }
 
-$response->setContent('<h1>Test content, yo!</h1>');
+$dispatcher = \FastRoute\simpleDispatcher(function(\FastRoute\RouteCollector $r){
+	$r->addRoute('GET', '/hello-world', function(){
+		echo 'You want "Hello, world?" You got it.';
+	});
+	$r->addRoute('GET', '/another-route', function(){
+		echo "Hey, here's another route";
+	});
+});
 
-echo $response->getContent();
+$routeInfo = $dispatcher->dispatch($request->getMethod(), $request->getPath());
+
+switch ($routeInfo[0]) {
+	case \FastRoute\Dispatcher::NOT_FOUND:
+		$response->setContent('404 - page not found. Sorry!');
+		$response->setStatusCode(404);
+		break;
+	case \FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
+		$response->setContent('405 - method not allowed. Sorry!');
+		$response->setStatusCode(405);
+		break;
+	case \FastRoute\Dispatcher::FOUND:
+		$handler = $routeInfo[1];
+		$vars = $routeInfo[2];
+		call_user_func($handler, $vars);
+		break;
+}
