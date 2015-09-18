@@ -24,9 +24,18 @@ if ($environment !== 'production'){
 
 $whoops->register();
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+/**
+* Uses patricklouys/http
+* to follow tutorial more easily
+*/
 
-$request = Request::createFromGlobals();
-echo $request->getPathInfo();
+$request = new \Http\HttpRequest($_GET, $_POST, $_COOKIE, $_FILES, $_SERVER);
+$response = new \Http\HttpResponse;
 
+foreach ($response->getHeaders() as $header) {
+	header($header, false);  // ~ overwrite existing headers = false
+}
+
+$response->setContent('<h1>Test content, yo!</h1>');
+
+echo $response->getContent();
