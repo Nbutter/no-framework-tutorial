@@ -1,0 +1,21 @@
+{
+	"name": "'no framework' tutorial",
+	"description": "uses https://github.com/PatrickLouys/no-framework-tutorial to learn PHP",
+	"keywords": ["tutorial", "php"],
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Nicholas Butterworth",
+			"email": "nothanks@example.com",
+			"role": "php tyro"
+			}
+	],
+	"require": {
+		"php": ">=5.5.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"Example\\": "src/"
+		}
+	}
+}
