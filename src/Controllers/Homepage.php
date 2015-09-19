@@ -21,7 +21,7 @@ class Homepage
 	public function show() {
 		
 		$data = [ 'name' => $this->request->getParameter('name', 'stranger'),];
-		$html = $this->renderer->render('Hello {{name}}, you magnificent bastard', $data);
+		$html = $this->renderer->render('Homepage', $data);
 		$this->response->setContent($html);
 
 		// older way to show content
