@@ -29,8 +29,10 @@ $whoops->register();
 * to follow tutorial more easily
 */
 
-$request = new \Http\HttpRequest($_GET, $_POST, $_COOKIE, $_FILES, $_SERVER);
-$response = new \Http\HttpResponse;
+$injector = include('Dependencies.php'); //uses Auryn injector
+
+$request = $injector->make('Http\HttpRequest');
+$response = $injector->make('Http\HttpResponse');
 
 foreach ($response->getHeaders() as $header) {
 	header($header, false);  // ~ overwrite existing headers = false
@@ -60,8 +62,7 @@ switch ($routeInfo[0]) {
 		$className = $routeInfo[1][0];
 		$method = $routeInfo[1][1];
 		$vars = $routeInfo[2];
-		$class = new $className($response);
-		$class->show();
-		//$class->$method($vars);
+		$class = $injector->make($className);
+		$class->$method($vars);
 		break;
 }
