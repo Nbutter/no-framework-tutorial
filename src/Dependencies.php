@@ -24,7 +24,7 @@ $injector->define('Mustache_Engine', [
 		],
 	]);
 
-$injector->define('Example\Page\FilePageReader', [
+$injector->define('Noframework\Page\FilePageReader', [
 	':pageFolder'=> __DIR__ . '/../pages',
 	]);
 

@@ -34,7 +34,8 @@ class Page
 			$data['content'] = $this->pageReader->readBySlug($slug);	
 		} catch (InvalidPageException $e) {
 			$this->response->setStatusCode(404);
-			return $this->response->setContent('404 - Page not found');
+			$this->response->setContent('404 - Page not found');
+			echo $this->response->getContent(); // not in tutorial
 		}
 		
 		$html = $this->renderer->render('Page', $data);
