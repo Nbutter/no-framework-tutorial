@@ -20,7 +20,14 @@ class Homepage
 
 	public function show() {
 		
-		$data = [ 'name' => $this->request->getParameter('name', 'stranger'),];
+		$data = [ 
+			'name' => $this->request->getParameter('name', 'stranger'),
+			'menuItems' => [
+				['href' => '/', 'text' => 'Homepage',], // adding a trailing comma
+				['href' => 'http://www.google.com', 'text' => 'Google',],
+			],
+		];
+
 		$html = $this->renderer->render('Homepage', $data);
 		$this->response->setContent($html);
 
