@@ -38,6 +38,8 @@ $injector->delegate('Twig_Environment', function() use ($injector) {
 
 $injector->alias('Noframework\Template\Renderer', 'Noframework\Template\TwigRenderer');
 
+$injector->alias('Noframework\Template\FrontendRenderer', 'Noframework\Template\FrontendTwigRenderer');
+
 /**
 * Accessing page data
 */

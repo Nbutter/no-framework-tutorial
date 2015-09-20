@@ -4,7 +4,7 @@ namespace Noframework\Controllers;
 
 use Http\Request;
 use Http\Response; 
-use Noframework\Template\Renderer;
+use Noframework\Template\FrontendRenderer;
 
 class Homepage
 {
@@ -12,7 +12,7 @@ class Homepage
 	private $response;
 	private $renderer;
 
-	public function __construct(Request $request, Response $response, Renderer $renderer) {
+	public function __construct(Request $request, Response $response, FrontendRenderer $renderer) {
 		$this->request = $request;
 		$this->response = $response;
 		$this->renderer = $renderer;
@@ -22,10 +22,6 @@ class Homepage
 		
 		$data = [ 
 			'name' => $this->request->getParameter('name', 'stranger'),
-			'menuItems' => [
-				['href' => '/', 'text' => 'Homepage',], // adding a trailing comma
-				['href' => 'http://www.google.com', 'text' => 'Google',],
-			],
 		];
 
 		$html = $this->renderer->render('Homepage', $data);
