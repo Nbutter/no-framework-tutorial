@@ -28,8 +28,8 @@ $injector->define('Example\Page\FilePageReader', [
 	':pageFolder'=> __DIR__ . '/../pages',
 	]);
 
-$injector->alias('Example\Page\PageReader', 'Example\Page\FilePageReader');
-$injector->share('Example\Page\FilePageReader');
+$injector->alias('Noframework\Page\PageReader', 'Noframework\Page\FilePageReader');
+$injector->share('Noframework\Page\FilePageReader');
 
 return $injector;
 
