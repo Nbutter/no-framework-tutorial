@@ -2,10 +2,10 @@
 
 namespace Noframework\Controllers;
 
+use Noframework\Page\InvalidPageException;
 use Http\Response;
 use Noframework\Template\Renderer;
 use Noframework\Page\PageReader;
-use Noframework\Page\InvalidPageException;
 
 class Page
 {
@@ -33,11 +33,14 @@ class Page
 		try {
 			$data['content'] = $this->pageReader->readBySlug($slug);	
 		} catch (InvalidPageException $e) {
+			//echo 'did you catch me?';
 			$this->response->setStatusCode(404);
 			$this->response->setContent('404 - Page not found');
 			echo $this->response->getContent(); // not in tutorial
+			return; // not in tutorial... needed this to exit 
 		}
 		
+		//$data['content'] = $this->pageReader->readBySlug($slug);
 		$html = $this->renderer->render('Page', $data);
 		$this->response->setContent($html);
 		echo $this->response->getContent(); // not in tutorial (!)
