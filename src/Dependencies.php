@@ -51,6 +51,13 @@ $injector->define('Noframework\Page\FilePageReader', [
 $injector->alias('Noframework\Page\PageReader', 'Noframework\Page\FilePageReader');
 $injector->share('Noframework\Page\FilePageReader');
 
+/**
+* Reading menus
+*/
+
+$injector->alias('Noframework\Menu\MenuReader', 'Noframework\Menu\ArrayMenuReader');
+$injector->share('Noframework\Menu\FileMenuReader');
+
 
 
 return $injector;
